@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>newBean</title>
+  <link rel="stylesheet" href="../../new.css">
+  <link rel="icon" href="../../favicon.ico">
+</head>
+
+<body>
+  <header>
+    <a href="../../index.html"><img src="../../logo.svg" style="height: 3em;"></a>
+  </header>
+  <main>
+    <h1>退職給付会計</h1>
+    <p>
+      仕事で急遽退職給付会計を知る必要が出てきたため、参考書やインターネットで概要を調べ以下にまとめました。全体像及び日本基準とIFRSとの差異の理解にとどまり、実務的な細かい処理についての学習は今後の課題としています。<br>
+      以下の説明はIFRSベースで記述し、その後に日本基準との差異を説明する形にしています。
+    </p>
+    <h2>1. 概要</h2>
+    <p>
+      退職給付には、「退職一時金」と「企業年金」の２種類があります。企業年金は更に「確定給付型企業年金」と「確定拠出型企業年金」に分けることができます。退職給付会計は、「退職一時金」及び「確定給付型企業年金」を対象とする会計基準です。
+    </p>
+    <div style="text-align: center;">
+      <img src="./01_構成図.svg" alt="構成図">
+    </div>
+    <h3>退職一時金</h3>
+    <p>
+      退職時に企業内部の資金から一括で退職者に支払われます。企業の内部資金から支払われるもので、企業外部に資産を積み立てるものではありません。つまり、積み立てた資産は企業の資産としてBSに計上されています。役員退職慰労金や臨時割増退職金などの一時金制度も「退職一時金」に含めて考えます。
+    </p>
+    <h3>企業年金</h3>
+    <p>
+      「年金」とは定期的・継続的に支給される金銭のことです。年金は公的年金と私的年金に分けられます。私的年金には、「確定給付型企業年金」と「確定拠出型企業年金」の２種類があり、この内、退職給付会計が対象とするのは後者の確定給付型企業年金のみです。これらは、企業外部に年金資産を積み立てて、そこから退職者に支払われます。従って、積み立てられた資産そのものがその企業のBSに計上されることはありません。
+    </p>
+    <h2>2. 会計処理</h2>
+    <p>
+      退職給付会計により連結BS上で認識されるのは「退職給付に係る負債（資産）」となります。これは、下図の通り<b>制度資産</b>と<b>確定給付制度債務</b>の差額として認識されるものです（日本基準では制度資産を年金資産、確定給付制度債務を退職給付債務と呼びます）。
+    </p>
+    <div style="text-align: center;">
+      <img src="./02_退職給付負債.svg" alt="退職給付負債">
+    </div>
+    <b>** GAAP差異 **</b><br>
+    <blockquote>
+      上図は積立不足が生じている場合であり、反対に積立超過の場合には資産が認識されることになります。ただし、積立超過で資産計上を行う場合、制度によっては企業が超過した資産を全て自由に使用できるわけではないため（一部を従業員に還元する必要があるため）、資産計上額は企業が便益を受ける額に限定されます。この資産計上の上限額のことを<b>アセットシーリング</b>と呼びます。日本基準にはこのアセットシーリングの考え方はなく、積立超過した部分の全額が資産計上されます。
+    </blockquote>
+    <p>
+      以下では、確定給付制度債務や制度資産が増減する事象について１つ１つ仕訳を交えながら確認していきます。
+    </p>
+    <h3>勤務費用の発生</h3>
+    <p>
+      従業員が今期提供した役務の対価として、企業が退職時以降に支払うことを約束している額があれば、その現在価値を今期の費用として認識する必要があります。この費用を<b>勤務費用</b>と呼びます。他にも、勤務費用には制度の改定や縮小、清算に基づく過去の確定給付制度債務の変動（過去勤務費用）も含みます。勤務費用の仕訳は以下のような形になります。
+    </p>
+    <table class="journal_entry" style="width:70%;">
+      <thead>
+        <tr>
+          <td class="je_memo"></td>
+          <td class="je_dr">借方</td>
+          <td class="je_cr">貸方</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="je_dract">退職給付費用</td>
+          <td class="je_amt">20</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="je_cract">退職給付に係る負債</td>
+          <td></td>
+          <td class="je_amt">20</td>
+        </tr>
+      </tbody>
+    </table>
+    <b>** GAAP差異 **</b><br>
+    <blockquote>
+      日本基準では過去勤務費用を発生時の費用とはせず、税効果考慮後の金額で「その他の包括利益」として認識します。その後、一定期間内に費用処理して当期純利益に振り替えます（リサイクリング処理を行う）。一方、IFRSは過去勤務費用が発生した時点で当期純利益に振り替えます。<br>
+      ※IFRSでも2011年の改正以前は、過去勤務債務のうち一部について遅延認識を認めていましたが、改正後は即時認識に変更されました。
+    </blockquote>
+    <h3>利息純額の発生</h3>
+    <p>
+      期首の制度資産と確定給付制度債務との差額に、割引率を乗じて算定したものが利息純額となります（時の経過による資産と負債の増額を表した処理となります）。ここで使用する割引率は、その国の優良社債を参照するこになっています。現在価値で利息純額の金額だけBS上の確定給付負債（もしくは資産）が増加します。
+    </p>
+    <div style="text-align: center;">
+      <img src="./03_利息純額.svg" alt="利息純額">
+    </div>
+    <p>利息純額が負債側で発生したときの仕訳は次の通りです。</p>
+    <table class="journal_entry" style="width:70%;">
+      <thead>
+        <tr>
+          <td class="je_memo"></td>
+          <td class="je_dr">借方</td>
+          <td class="je_cr">貸方</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="je_dract">退職給付費用</td>
+          <td class="je_amt">5</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="je_cract">退職給付に係る負債</td>
+          <td></td>
+          <td class="je_amt">5</td>
+        </tr>
+      </tbody>
+    </table>
+    <b>** GAAP差異 **</b><br>
+    <blockquote>
+      <p>
+        日本基準では年金資産に割引率を掛けるところはIFRSと同じですが、退職給付債務には割引率ではなく期待運用収益率を掛けることになります。また、使用する割引率として国債や優良社債等を認めており、国債が利用できる点が異なっています。割引率を見直す頻度も異なっており、日本基準では退職給付債務が10%以上変動しない場合、前期末の割引率を使用してもよいことになっていますが、IFRSにはそのような決まりがありません。
+      </p>
+      <div style="text-align: center;">
+        <img src="./04_利息費用.svg" alt="利息費用">
+      </div>
+      <p>
+        従って、日本基準では時の経過による利息部分を純額で認識するのではなく、年金資産と退職給付債務でそれぞれ別に捉えています（IFRSも開示では資産と債務で分けて記載することが要請されています）。また、退職給付債務については利息部分とそれ以外の予想される運用損益をまとめて期待運用収益としています。後で出てくる日本基準とIFRSの開示例を見るとGAAP差異がよく分かります。<br>
+        ※IFRSでも2011年の改正以前は期待運用収益を計上していましたが、事業主の恣意性が入る余地が大きいという理由で廃止されました。
+      </p>
+    </blockquote>
+    <h3>退職給付の支払い</h3>
+    <h4>(1) 企業から退職金が支払われる場合</h4>
+    <p>
+      退職一時金などにより、基金からではなく企業から従業員へ退職金が支払われる場合には、負債の取崩しが生じます。
+    </p>
+    <table class="journal_entry" style="width:70%;">
+      <thead>
+        <tr>
+          <td class="je_memo"></td>
+          <td class="je_dr">借方</td>
+          <td class="je_cr">貸方</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="je_dract">退職給付に係る負債</td>
+          <td class="je_amt">100</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="je_cract">現預金</td>
+          <td></td>
+          <td class="je_amt">100</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>(2) 基金から退職金が支払われる場合</h4>
+    <p>
+      基金から年金が支払われる場合は、制度資産と確定給付制度債務の両者が減額がされるため仕訳は不要です。
+    </p>
+    <h3>年金掛金の拠出</h3>
+    <p>
+      企業から年金基金へ掛金を拠出すると制度資産が増加します。制度資産の増加は退職給付債務を減らす方向に動かします。
+    </p>
+    <table class="journal_entry" style="width:70%;">
+      <thead>
+        <tr>
+          <td class="je_memo"></td>
+          <td class="je_dr">借方</td>
+          <td class="je_cr">貸方</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="je_dract">退職給付に係る負債</td>
+          <td class="je_amt">100</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="je_cract">現預金</td>
+          <td></td>
+          <td class="je_amt">100</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>再測定（OCIでの認識）</h3>
+    <p>
+      再測定は以下の種類に分けられます。
+    </p>
+    <ol>
+      <li>数理計算上の差異</li>
+      <li>制度資産の運用から生じた実際の収益（利息純額に含まれている金額を除く）</li>
+      <li>アセットシーリングの影響額</li>
+    </ol>
+    <p>
+      再測定は費用処理するのではなく、その他の包括利益で認識されます。
+    </p>
+    <table class="journal_entry" style="width:70%;">
+      <thead>
+        <tr>
+          <td class="je_memo"></td>
+          <td class="je_dr">借方</td>
+          <td class="je_cr">貸方</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="je_dract">退職給付に係る調整累計額（OCI）</td>
+          <td class="je_amt">20</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="je_cract">退職給付に係る負債</td>
+          <td></td>
+          <td class="je_amt">20</td>
+        </tr>
+      </tbody>
+    </table>
+    <b>** GAAP差異 **</b><br>
+    <blockquote>
+      <p>
+        同じ数理計算上の差異という言葉を使用していても、IFRSと日本基準ではその中身が異なっています。<br>
+        例えば、日本基準では期待運用収益と実際の運用結果の差異は数理計算上の差異に含めます。一方、IFRSでは再測定の２番目に記載した通り「制度資産の運用から生じた実際の収益」として数理計算上の差異とは別のものの扱いです。会計処理はどちらもその他の包括利益に認識されますが、IFRSの開示ではこれらの項目を別々に記載しなければならないため、基準差異をしっかりと理解しておく必要があるでしょう。
+      </p>
+      <h4>日本基準の開示例</h4>
+      <div>
+        <img src="./05_日本基準調整表.svg" alt="調整表">
+      </div>
+      <h4>IFRSの開示例</h4>
+      <div>
+        <img src="./06_IFRS調整表.svg" alt="IFRS調整表">
+      </div>
+    </blockquote>
+    <h4>再測定額のその後の扱い</h4>
+    <p>
+      IFRSでは純資産の細かな基準が全くないため、再測定により生じたOCIについても認識後の取り扱いは特に決まっていません。多くの会社では、「退職給付に係る調整累計額」を利益剰余金に振り替える処理を行っているようです。また、その振替タイミングも会計基準では決められていないため、OCIで認識後に即座に利益剰余金へ振り替えることが一般的なようです。
+    </p>
+    <table class="journal_entry" style="width:70%;">
+      <thead>
+        <tr>
+          <td class="je_memo"></td>
+          <td class="je_dr">借方</td>
+          <td class="je_cr">貸方</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="je_dract">利益剰余金</td>
+          <td class="je_amt">20</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="je_cract">退職給付に係る調整累計額（OCI）</td>
+          <td></td>
+          <td class="je_amt">20</td>
+        </tr>
+      </tbody>
+    </table>
+    <b>** GAAP差異 **</b><br>
+    <blockquote>
+      <p>
+        日本基準ではOCIで認識した未認識差異（数理計算上の差異及び過去勤務差異）については、平均残存勤務期間以内に費用処理することが求められています。従って、IFRSでは純損益に振り替えることなく、OCIで認識した後は資本の一部として残したままにしておくのに対し、日本基準ではOCIからPLへの振替（リサイクリング）が必要となる点がGAAP差異となっています。
+      </p>
+      <table class="journal_entry" style="width:70%;">
+        <thead>
+          <tr>
+            <td class="je_memo"></td>
+            <td class="je_dr">借方</td>
+            <td class="je_cr">貸方</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="je_dract">退職給付費用</td>
+            <td class="je_amt">20</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="je_cract">退職給付に係る調整累計額（OCI）</td>
+            <td></td>
+            <td class="je_amt">20</td>
+          </tr>
+        </tbody>
+      </table>
+    </blockquote>
+    <h3>参考図書</h3>
+    <dvi class="amazon-box">
+      <div class="amazon-container">
+        <a href="https://amzn.to/3nCeisQ" target="_blank"><img src="https://m.media-amazon.com/images/I/51VN0jfgVoL._SL160_.jpg"/></a>
+      </div>
+      <dvi class ="amazon-content">
+        <ul>
+          <li><a href="https://amzn.to/3M6Wgcb" target="_blank">2 退職給付会計のしくみ(第2版) (【図解でざっくり会計シリーズ】)</a></li>
+          <li>新日本有限責任監査法人</li>
+          <li>出版社 : 中央経済社</li>
+          <li>発売日 : 2017/2/21</li>
+        </ul>
+      </dvi>
+    </dvi>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="top"><a href="#">トップへ戻る</a></div>
+      <div class="copyright">
+        <small>Copyright(C)newBean, Allright Reserved.</small>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
